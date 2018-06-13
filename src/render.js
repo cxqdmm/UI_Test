@@ -5,14 +5,14 @@ const $ = require('jquery')
 import { remote } from 'electron';
 $('.btn').on('click',() => {
   // 新窗口的大小
-  console.log(2)
+  console.log(3)
   let win = new remote.BrowserWindow({ width: 400, height: 320 })
   win.on('close', function () {
     // 窗口被关闭时清空资源
     win = null
   })
   // 加载网页
-  win.loadURL('www.baidu.com')
+  win.loadURL('https://github.com')
   // 显示窗口
   win.show()
 })

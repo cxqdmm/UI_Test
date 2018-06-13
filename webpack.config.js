@@ -8,20 +8,29 @@ module.exports = {
         filename: 'render.js'
     },
     module: {
-        rules: [{
-            test: /\.less$/,
-            use: [{
-                loader: "style-loader" // creates style nodes from JS strings
-            }, {
-                loader: "css-loader" // translates CSS into CommonJS
-            }, {
-                loader: "less-loader" // compiles Less to CSS
-            }]
+        rules: [ {
+            test: /\.vue$/,
+            loader: 'vue-loader',
+            options: {
+                loaders: {
+                    js: [
+                        { loader: 'cache-loader' },
+                        { loader: 'babel-loader', options: { presets: ['env'] } }
+                    ],
+                    less: 'vue-style-loader!css-loader!less-loader', // <style lang="less">
+                }
+            }
+        }, {
+            test: /\.js$/,
+            exclude: /(node_modules|bower_components)/,
+            use: {
+                loader: 'babel-loader',
+                options: {
+                    presets: ['env']
+                }
+            }
         }]
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env.NODE_ENV ':'production'
-          })
     ]
 }
