@@ -1,12 +1,11 @@
 const path = require('path');
 const webpack = require('webpack')
-process.env.NODE_ENV = 'development';
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/render.js',
     devtool: 'source-map',
     output: {
-        path: path.resolve(__dirname,'webapp/script'),
-        filename: 'bundle.js'
+        path: path.resolve(__dirname),
+        filename: 'render.js'
     },
     module: {
         rules: [{
@@ -22,7 +21,7 @@ module.exports = {
     },
     plugins: [
         new webpack.DefinePlugin({
-            'process.env.NODE_ENV ':'development'
+            'process.env.NODE_ENV ':'production'
           })
     ]
 }
