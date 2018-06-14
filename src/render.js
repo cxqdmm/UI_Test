@@ -29,8 +29,8 @@ $('#go').on('click', () => {
   if (webSocketDebuggerUrl) {   
     (async () => {
       const browser = await puppeteer.connect({browserWSEndpoint:webSocketDebuggerUrl});
-      const page = await browser.newPage();
-      await page.goto('https://google.com');
+      let targets = browser.targets();
+      console.log(1)
     })();
   }
 })
