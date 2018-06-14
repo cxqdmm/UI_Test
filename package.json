@@ -4,7 +4,7 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "electron":  "electron .",
+    "electron": "electron .",
     "watch": "webpack --mode development --watch --target electron-renderer ",
     "web": "webpack --target web && webpack-dev-server --target web --hot --inline",
     "packager": "webpack && electron-packager . --platform=linux --electron-version=1.6.6  --overwrite"
@@ -14,6 +14,7 @@
   "devDependencies": {
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.4",
+    "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "cache-loader": "^1.2.2",
     "css-loader": "^0.28.11",
@@ -23,6 +24,7 @@
     "is-electron-renderer": "^2.0.1",
     "less-loader": "^4.1.0",
     "puppeteer": "^1.5.0",
+    "request": "^2.87.0",
     "style-loader": "^0.21.0",
     "vue": "^2.5.16",
     "vue-loader": "^15.2.4",
