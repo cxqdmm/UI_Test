@@ -4,7 +4,7 @@ const WebSocket = require('ws');
   // const browser = await puppeteer.launch({headless:false})
   //   const page = await browser.newPage();
   // await page.goto('https://baidu.com');
-  let ws = new WebSocket('ws://localhost:9222/devtools/page/2d5f5746-ddf0-4fe7-8a8a-998e305d1907');
+  let ws = new WebSocket('ws://localhost:9222/devtools/page/63483d00-76b6-48a1-8787-13268e23c418');
 
   // 打开WebSocket连接后立刻发送一条消息:
   function send(method, params = {}) {
@@ -13,7 +13,8 @@ const WebSocket = require('ws');
     ws.send(message);
   }
   ws.on('open', function () {
-    send('Target.getTargets')
+    // send('Target.getTargets')
+    send('Page.navigate',{url:'https://note.youdao.com/web/#/file/recent/markdown/WEB9b210422e2ea8a9f5a761105e7e11177/'})
   });
 
   // 响应收到的消息:

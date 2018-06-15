@@ -54,6 +54,7 @@ $('#open').on('click',() => {
   })
   // 加载网页
   win.loadURL('https://www.baidu.com')
+  win.openDevTools({mode:'rigth'});
   // 显示窗口
   win.show()
 })
