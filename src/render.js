@@ -6,7 +6,14 @@ const $ = require('jquery')
 const request = require('request');
 const electron = require('electron');
 const puppeteer = require('puppeteer'); 
-let webSocketDebuggerUrl;
+// const {createPageForTarget} = require('./lib/puppeteer_utils.js')
+async function createPageForTarget(browser, targetId) {
+  const target = await browser._targets.get(targetId);
+  target._pagePromise = void 0;
+  const page = await target.page();
+  return page;
+}
+let webSocketDebuggerUrl,targetId,browser;
 $('#getPageInfo').on('click',() =>  {
   //获取打开的标签页信息
   request('http://localhost:9222/json', function (error, response, body) {
@@ -15,6 +22,7 @@ $('#getPageInfo').on('click',() =>  {
       let remotePage = body.length && body[0];
       if (remotePage) {
         webSocketDebuggerUrl = remotePage.webSocketDebuggerUrl;
+        targetId = remotePage.id;
       }
     }
   })
@@ -28,9 +36,11 @@ $('#getPageInfo').on('click',() =>  {
 $('#go').on('click', () => {
   if (webSocketDebuggerUrl) {   
     (async () => {
-      const browser = await puppeteer.connect({browserWSEndpoint:webSocketDebuggerUrl});
-      let targets = browser.targets();
-      console.log(1)
+      if (!browser) {
+        browser = await puppeteer.connect({browserWSEndpoint:webSocketDebuggerUrl});
+      }
+      const page = await createPageForTarget(browser, targetId);
+      page.goto('www.qq.com')
     })();
   }
 })
