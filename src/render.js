@@ -46,7 +46,6 @@ $('#go').on('click', () => {
 })
 $('#open').on('click',() => {
   // 新窗口的大小
-  console.log(electron)
   let win = new electron.remote.BrowserWindow({ width: 400, height: 320 })
   win.on('close', function () {
     // 窗口被关闭时清空资源

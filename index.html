@@ -1,13 +1,44 @@
 <!DOCTYPE html>
-<html>
+<html style="height: 100%;">
   <head>
     <meta charset="UTF-8">
     <title>Hello World!</title>
+    <style>
+      .flex {
+        display: flex;
+      }
+      .left-panel {
+        flex: 0 0 400px;
+      }
+      .right-panel {
+        flex: 1;
+        padding: 40px;
+      }
+      .container {
+        height: 100%;
+      }
+      body {
+        height: 100%;
+        margin:0;
+        padding:0;
+      }
+      #page {
+        height:100%; 
+        box-shadow: 0px 0px 11px 0px #ccc;
+      }
+    </style>
   </head>
   <body id="app">
-    <button id="open">打开页面</button>
-    <button id="getPageInfo">获取连接信息</button>
-    <button id="go">启动puppeteer</button>
+    <section class="flex container">
+      <section class="left-panel">
+        <button id="open">打开页面</button>
+        <button id="getPageInfo">获取连接信息</button>
+        <button id="go">启动puppeteer</button>
+      </section>
+      <section class="right-panel"> 
+        <webview id="page" src="https://www.baidu.com/"></webview>
+      </section>
+    </section>
     <script src="./src/render.js">
       // You can also require other files to run in this process
    
