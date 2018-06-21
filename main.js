@@ -1,46 +1,35 @@
-const {app, BrowserWindow,BrowserView} = require('electron')
+const {app,Menu,BrowserWindow,BrowserView, globalShortcut,windowState} = require('electron')
 
-// Keep a global reference of the window object, if you don't, the window will
-// be closed automatically when the JavaScript object is garbage collected.
-app.commandLine.appendSwitch('remote-debugging-port', '9222');
+app.commandLine.appendSwitch('remote-debugging-port', '9223');
+
 let mainWindow;
 function createWindow () {
   // Create the browser window.
+    // 注册打开控制台的快捷键
+  globalShortcut.register('CommandOrControl+Alt+P', function () {
+    mainWindow.webContents.openDevTools();
+  })
   mainWindow = new BrowserWindow({width: 800, height: 600, webPreferences: {webSecurity: false}})
-
   // and load the index.html of the app.
   mainWindow.loadFile('index.html')
   mainWindow.openDevTools({mode:'rigth'});
-
   // Open the DevTools.
+  console.log(process.pid)
   mainWindow.webContents.openDevTools()
-
   // Emitted loadFile
   mainWindow.on('closed', function () {
-    // Dereference the window object, usually you would store windows
-    // in an array if your app supports multi windows, this is the time
-    // when you should delete the corresponding element.
     mainWindow = null
   })
 }
 
-// This method will be called when Electron has finished
-// initialization and is ready to create browser windows.
-// Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
-
-// Quit when all windows are closed.
 app.on('window-all-closed', function () {
-  // On OS X it is common for applications and their menu bar
-  // to stay active until the user quits explicitly with Cmd + Q
   if (process.platform !== 'darwin') {
     app.quit()
   }
 })
 
 app.on('activate', function () {
-  // On OS X it's common to re-create a window in the app when the
-  // dock icon is clicked and there are no other windows open.
   if (mainWindow === null) {
     createWindow()
   }

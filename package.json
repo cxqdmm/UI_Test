@@ -5,7 +5,7 @@
   "main": "main.js",
   "scripts": {
     "electron": "electron .",
-    "watch": "webpack --mode development --watch --target electron-renderer ",
+    "watch": "webpack --mode production --watch --target electron-renderer ",
     "web": "webpack --target web && webpack-dev-server --target web --hot --inline",
     "packager": "webpack && electron-packager . --platform=linux --electron-version=1.6.6  --overwrite"
   },
@@ -17,6 +17,7 @@
     "babel-polyfill": "^6.26.0",
     "babel-preset-env": "^1.7.0",
     "cache-loader": "^1.2.2",
+    "chrome-remote-interface": "^0.25.6",
     "css-loader": "^0.28.11",
     "electron": "^2.0.2",
     "electron-packager": "^12.1.0",

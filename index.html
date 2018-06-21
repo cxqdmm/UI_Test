@@ -9,6 +9,7 @@
       }
       .left-panel {
         flex: 0 0 400px;
+        flex-direction: column;
       }
       .right-panel {
         flex: 1;
@@ -32,11 +33,12 @@
     <section class="flex container">
       <section class="left-panel">
         <button id="open">打开页面</button>
-        <button id="getPageInfo">获取连接信息</button>
-        <button id="go">启动puppeteer</button>
+        <button id="getPageInfo">建立链接</button>
+        <button id="go">运行</button>
+        <textarea name="" id="command" style="width:100%"  cols="30" rows="10"></textarea>
       </section>
       <section class="right-panel"> 
-        <webview id="page" src="https://www.baidu.com/"></webview>
+        <webview id="page" src="https://m.vip.com/"></webview>
       </section>
     </section>
     <script src="./src/render.js">
