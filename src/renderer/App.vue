@@ -1,6 +1,6 @@
 <template>
   <div>
-      <b-alert show>Default Alert</b-alert>
+
     <transition name="fade">
       <router-view></router-view>
     </transition>
@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// import 'bootstrap-vue/dist/bootstrap-vue.css'
 import jetpack from 'fs-jetpack'
 
 export default {

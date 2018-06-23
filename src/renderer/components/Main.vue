@@ -1,24 +1,12 @@
 <template>
   <div class="d-flex h-100 w-100 flex-column">
     <header class="p-4 mb-auto">
-        <label for="">1212</label>
     </header>
     <main class="mt-5">
       <transition name="fade" mode="out-in">
-        <div>
-          <b-card title="Card Title"
-                  img-src="https://picsum.photos/600/300/?image=25"
-                  img-alt="Image"
-                  img-top
-                  tag="article"
-                  style="max-width: 20rem;"
-                  class="mb-2">
-            <p class="card-text">
-              Some quick example text to build on the card title and make up the bulk of the card's content.
-            </p>
-            <b-button href="#" variant="primary">Go somewhere</b-button>
-          </b-card>
-        </div>
+<template>
+    <Input v-model="name" placeholder="Enter something..." style="width: 300px"></Input>
+</template>
 
       </transition>
     </main>
