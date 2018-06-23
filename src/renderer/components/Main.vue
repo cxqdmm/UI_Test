@@ -1,41 +1,58 @@
 <template>
-  <div class="d-flex h-100 w-100 flex-column">
-    <header class="p-4 mb-auto">
-    </header>
-    <main class="mt-5">
-      <transition name="fade" mode="out-in">
-<template>
-    <Input v-model="name" placeholder="Enter something..." style="width: 300px"></Input>
-</template>
+	<div class="d-flex h-100 w-100 flex-column main-container">
+		<main class="d-flex h-100">
+			<transition name="fade" mode="out-in">
+				<template>
+					<Row class="left-menu">
+						<Col>
+						<Menu @on-select="push">
+							<Submenu name="1">
+								<template slot="title">
+									<Icon type="ios-paper"></Icon>
+									UI自动化测试
+								</template>
+								<MenuItem name="/main/puppeteer">UI测试</MenuItem>
+							</Submenu>
+							<Submenu name="2">
+								<template slot="title">
+									<Icon type="ios-people"></Icon>
+									用户管理
+								</template>
+								<MenuItem name="2-1">用户信息</MenuItem>
+							</Submenu>
+						</Menu>
+						</Col>
+					</Row>
+				</template>
 
-      </transition>
-    </main>
-    <footer class="mt-auto p-4" v-if="form === 'INVOICE_COUNT'">
-      <div class="row">
-        <div class="col">
-          <p class="progress-tip text-center pt-5"><i id="progress-tip" class="far fa-2x fa-question-circle"></i></p>
-          <b-popover  ref="popover" target="progress-tip" triggers="click" placement="top">
-             <template slot="title">Speed</template>
-             We purposely check your account slowly to prevent the Uber website from knowing you are running a script.
-             <br/>
-             <p class="text-right"><a class="js-external-link" href="https://github.com/mrgodhani/uberrun#limitation">Learn more</a></p>
-          </b-popover>
-        </div>
-      </div>
-    </footer>
-
-  </div>
+			</transition>
+			<transition name="fade">
+				<router-view></router-view>
+			</transition>
+		</main>
+	</div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {
-      name: "123"
-    };
-  }
-};
+    data() {
+        return {
+            name: '123'
+        }
+	},
+    methods: {
+		push: function(url) {
+			this.$router.push(url)
+        }
+    }
+}
 </script>
 
 <style lang="scss">
+.left-menu {
+    box-shadow: 1px 3px 1px 0px #ccc;
+}
+.main-container .ivu-menu-vertical.ivu-menu-light:after {
+    background: white;
+}
 </style>

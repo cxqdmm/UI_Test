@@ -1,10 +1,7 @@
 <template>
-  <div>
-
     <transition name="fade">
       <router-view></router-view>
     </transition>
-  </div>
 </template>
 
 <script>
@@ -12,13 +9,14 @@
 import jetpack from 'fs-jetpack'
 
 export default {
-  name: 'ridereceipts',
   mounted () {
     const documentDir = jetpack.cwd(this.$electron.remote.app.getPath('documents'))
 
     if (!this.$electronstore.get('invoicePath')) {
       this.$electronstore.set('invoicePath', `${documentDir.path()}/Ride Receipts/`)
     }
+		let ipc = require('electron').ipcRenderer;
+		ipc.send('max-window');
   }
 }
 </script>

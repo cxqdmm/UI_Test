@@ -3,15 +3,19 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 export default new Router({
+    mode:'hash',
     routes: [
         {
-            path: '/',
-            name: 'main-page',
-            component: () => { return import('../components/Main') }
+            path: '/main',
+            name: 'main',
+            component: () => { return import('../components/Main') },
+            children:[
+                { path: 'puppeteer', component: () => { return import('../components/Puppeteer') }},
+            ]
         },
         {
             path: '*',
-            redirect: '/'
+            redirect: '/main'
         }
     ]
 })

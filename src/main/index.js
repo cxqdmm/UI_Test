@@ -103,7 +103,21 @@ app.on('activate', () => {
     createWindow()
   }
 })
-
+ipcMain.on('window-all-closed', () => {
+  app.quit();
+});
+//小化
+ipcMain.on('hide-window', () => {
+  mainWindow.minimize();
+});
+//最大化
+ipcMain.on('max-window', () => {
+  mainWindow.maximize();
+});
+//还原
+ipcMain.on('orignal-window', () => {
+  mainWindow.unmaximize();
+});
 ipcMain.on('online-status-changed', (event, status) => {
   event.sender.send('onlinestatus', status)
 })
