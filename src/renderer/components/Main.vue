@@ -11,7 +11,7 @@
 									<Icon type="ios-paper"></Icon>
 									UI自动化测试
 								</template>
-								<MenuItem name="/main/puppeteer">UI测试</MenuItem>
+								<MenuItem name="/main/puppeteer/uitestIndex">UI测试</MenuItem>
 							</Submenu>
 							<Submenu name="2">
 								<template slot="title">

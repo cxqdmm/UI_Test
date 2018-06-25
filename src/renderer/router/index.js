@@ -10,7 +10,17 @@ export default new Router({
             name: 'main',
             component: () => { return import('../components/Main') },
             children:[
-                { path: 'puppeteer', component: () => { return import('../components/Puppeteer') }},
+                { 
+                    path: 'puppeteer', 
+                    component: () => { return import('../components/puppeteer') },
+                    children: [
+                        {
+                            path: 'uitestIndex',
+                            name: '测试页面',
+                            component: () => {return import('../components/puppeteer/uitestIndex')}
+                        }
+                    ]
+                },
             ]
         },
         {
