@@ -9,16 +9,9 @@
 							<Submenu name="1">
 								<template slot="title">
 									<Icon type="ios-paper"></Icon>
-									UI自动化测试
+									项目管理
 								</template>
-								<MenuItem name="/main/puppeteer">UI测试</MenuItem>
-							</Submenu>
-							<Submenu name="2">
-								<template slot="title">
-									<Icon type="ios-people"></Icon>
-									用户管理
-								</template>
-								<MenuItem name="2-1">用户信息</MenuItem>
+								<MenuItem name="/main/autoLogIn">自动切换</MenuItem>
 							</Submenu>
 						</Menu>
 						</Col>

@@ -16,7 +16,7 @@ export default {
       this.$electronstore.set('invoicePath', `${documentDir.path()}/Ride Receipts/`)
     }
 		let ipc = require('electron').ipcRenderer;
-		ipc.send('max-window');
+		// ipc.send('max-window');
   }
 }
 </script>

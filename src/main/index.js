@@ -1,12 +1,13 @@
 'use strict'
 
-import { app, BrowserWindow, ipcMain, Menu } from 'electron'
+import { app, BrowserWindow, ipcMain, Menu,globalShortcut,clipboard} from 'electron'
 import { autoUpdater } from 'electron-updater'
 import fkill from 'fkill'
 import Store from 'electron-store'
 
 import 'electron-context-menu'
-
+var fs = require('fs');
+var path = require('path')
 let myWindow = null
 
 /**
@@ -28,11 +29,11 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     height: 650,
-    useContentSize: true,
-    width: 960,
-    minWidth: 900,
+    // useContentSize: true,
+    width: 560,
+    minWidth: 300,
     minHeight: 600,
-    resizable: false
+    resizable: true
   })
 
   mainWindow.loadURL(winURL)
@@ -40,7 +41,18 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
-
+  //注册打开控制台的快捷键
+  globalShortcut.register('ctrl+shift+alt+e', function () {
+      let win = BrowserWindow.getFocusedWindow();
+      if (win) {
+          win.webContents.openDevTools({ detach: true });
+      }
+  });
+  //注册打开控制台的快捷键
+//   globalShortcut.register('ctrl+v', function () {
+//     mainWindow.webContents.send('paste','2323')
+    
+// });  
   // Create the Application's main menu
   const template = [{
     label: 'Application',
@@ -60,7 +72,10 @@ function createWindow () {
       { type: 'separator' },
       { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
       { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
-      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' },
+      { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:',click:function(){
+        var data = clipboard.readText();
+        mainWindow.webContents.send('paste',data)
+      } },
       { label: 'Select All', accelerator: 'CmdOrCtrl+A', selector: 'selectAll:' }
     ]}
   ]
@@ -153,7 +168,10 @@ ipcMain.on('filter_option', (event, data) => {
 ipcMain.on('filters', (event, data) => {
   event.sender.send('filters', data)
 })
-
+ipcMain.on('switchHost',(event, data) => {
+  var file = fs.readFileSync(path.resolve('C:/Windows/System32/drivers/etc','hosts'));
+  console.log(file.toString())
+})
 /**
  * Auto Updater
  *

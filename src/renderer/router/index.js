@@ -8,9 +8,9 @@ export default new Router({
         {
             path: '/main',
             name: 'main',
-            component: () => { return import('../components/Main') },
+            component: () => { return import('../views/Main') },
             children:[
-                { path: 'puppeteer', component: () => { return import('../components/Puppeteer') }},
+                { path: 'autoLogIn', component: () => { return import('../views/autoLogIn') }},
             ]
         },
         {

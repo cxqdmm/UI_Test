@@ -77,7 +77,7 @@ let rendererConfig = {
       },
       {
         test: /\.vue$/,
-        use: {
+        use: [{
           loader: 'vue-loader',
           options: {
             extractCSS: process.env.NODE_ENV === 'production',
@@ -86,7 +86,12 @@ let rendererConfig = {
               scss: 'vue-style-loader!css-loader!sass-loader'
             }
           }
-        }
+        },{
+          loader: 'iview-loader',
+          options: {
+              prefix: false
+          }
+      }]
       },
       {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
