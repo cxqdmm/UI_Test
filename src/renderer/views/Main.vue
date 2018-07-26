@@ -5,15 +5,7 @@
 				<template>
 					<Row class="left-menu">
 						<Col>
-						<Menu @on-select="push">
-							<Submenu name="1">
-								<template slot="title">
-									<Icon type="ios-paper"></Icon>
-									项目管理
-								</template>
-								<MenuItem name="/main/autoLogIn">自动切换</MenuItem>
-							</Submenu>
-						</Menu>
+						<a href="javascript" @click="push('/main/autoLogIn')">自动登录</a>
 						</Col>
 					</Row>
 				</template>
