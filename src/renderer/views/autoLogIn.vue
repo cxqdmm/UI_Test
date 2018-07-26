@@ -1,21 +1,25 @@
 <template>
-    <div class="h-100 w-100 flex-column ml-1 d-flex">
-        <div>
-            <Button v-if="linkstatus == 0 || linkstatus == 1" :loading="linkstatus == 1" type="primary" style="margin-left: 20px" @click="fetchPort">连接chrome</Button>
+    <div class="h-100 w-100 flex-column d-flex">
+        <div class="vi-head d-flex align-items-center pt-2 pb-2">
+            <Button v-if="linkstatus == 0 || linkstatus == 1" :loading="linkstatus == 1" type="primary" shape="circle" size="small" style="margin-left: 20px;box-shadow:0px 0px 1px 1px #ccc" @click="linkChrome">连接chrome</Button>
             <Button v-else @click="close">断开连接</Button>
-            <Button v-if="linkstatus == 2" @click="refreshPages">刷新</Button>
-            <Dropdown trigger="click" style="margin-left: 20px">
-                <a href="javascript:void(0)">
+            <!-- <Dropdown trigger="click" style="margin-left: 20px"> -->
+                <!-- <a href="javascript:void(0)">
                     chrome页面
                     <Icon type="arrow-down-b"></Icon>
-                </a>
-                <DropdownMenu slot="list">
+                </a> -->
+                <!-- <DropdownMenu slot="list">
                     <DropdownItem :key="key" v-for="(value, key) in pages" style="padding:0;display:block">
                         <span @click="selectPage(value)" style="margin:7px 16px;display:block">{{ value.webTitle }}</span>
                     </DropdownItem>
-                </DropdownMenu>
-            </Dropdown>`
-            <label for="">title：{{selectedPage.webTitle}}</label>
+                </DropdownMenu> -->
+            <!-- </Dropdown> -->
+            <Select filterable>
+                <Option :key="item.key" :value="item.webTitle" v-for="item in pages" style="padding:0;display:block">
+                      <span @click="selectPage(item)" style="margin:7px 16px;display:block">{{ item.webTitle }}</span>
+                </Option>
+            </Select>
+            <!-- <span>title：{{selectedPage.webTitle}}</span> -->
         </div>
         <Modal title="Title" v-model="createModal.visible" @on-ok="createNew" :closable="false">
             <Form :label-width="80">
@@ -106,8 +110,7 @@ export default {
         selectPage(value) {
             this.selectedPage = value;
         },
-        fetchPort() {
-            this.linkstatus = 1;
+        fetchChromeRemoteDebugPort() {
             request('http://localhost:9223/json', async (error, response, body) => {
                 body = JSON.parse(body)
                 if (!error && response.statusCode == 200 && body.length) {
@@ -124,10 +127,10 @@ export default {
                             let pages = await puppe.browser.pages();
                             for (let page of pages) {
                                 let title = await page.title()
-                                console.log('标题'+title)
-                                page.webTitle = title;
+                                page.webTitle = title || '未知';
                             }
                             this.pages = pages;
+                            console.log(pages)
                             this.linkstatus = 2;
                             puppe.browser.on('disconnected', () => {
                                 console.log('断开连接')
@@ -146,6 +149,13 @@ export default {
                     }
                 }
             })
+        },
+        linkChrome() {
+            this.linkstatus = 1;
+            this.$nextTick(() => {
+               this.fetchChromeRemoteDebugPort();
+            })
+
         },
         save() {
             // const message = clipboard.readText()
@@ -231,7 +241,9 @@ export default {
 </script>
 
 <style lang="scss">
-
+.vi-head {
+    box-shadow: 3px -1px 2px 2px #ccc;
+}
 .v-list {
     .v-item {
         padding: 5px;

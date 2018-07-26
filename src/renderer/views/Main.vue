@@ -5,7 +5,7 @@
 				<template>
 					<Row class="left-menu">
 						<Col>
-						<a href="javascript" @click="push('/main/autoLogIn')">自动登录</a>
+						<a href="javascript:;" @click="push('/main/autoLogIn')">自动登录</a>
 						</Col>
 					</Row>
 				</template>
@@ -27,6 +27,7 @@ export default {
 	},
     methods: {
 		push: function(url) {
+			alert(url)
 			this.$router.push(url)
         }
     }
