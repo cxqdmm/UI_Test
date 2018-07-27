@@ -20,7 +20,20 @@ class Puppe extends EventEmitter {
             let pages = await this.browser.pages();
             for (let page of pages) {
                 let title = await page.title()
-                page.webTitle = title;
+                let s = await page.evaluate(function() {
+                    return {
+                        width:document.body.clientWidth,
+                        height:document.body.clientHeight,
+                    }
+                })
+                console.log(s);
+                // await page.emulate({
+                //     viewport:{
+                //         width: width,
+                //         height: height
+                //     }
+                // })
+                page.webTitle = title || 'unknow';
             }
             return pages;
         }

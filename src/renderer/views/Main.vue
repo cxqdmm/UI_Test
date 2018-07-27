@@ -5,7 +5,14 @@
 				<template>
 					<Row class="left-menu">
 						<Col>
-						<a href="javascript:;" @click="push('/main/autoLogIn')">自动登录</a>
+						    <Menu @on-select="push">
+							<MenuGroup title="账户">
+								<MenuItem name="/main/autoLogIn">
+									<Icon type="document-text"></Icon>
+									自动登录
+								</MenuItem>
+							</MenuGroup>
+							</Menu>
 						</Col>
 					</Row>
 				</template>
@@ -27,7 +34,6 @@ export default {
 	},
     methods: {
 		push: function(url) {
-			alert(url)
 			this.$router.push(url)
         }
     }
@@ -36,7 +42,7 @@ export default {
 
 <style lang="scss">
 .left-menu {
-    box-shadow: 1px 3px 1px 0px #ccc;
+	box-shadow: 1px 3px 1px 0px #ccc;
 }
 .main-container .ivu-menu-vertical.ivu-menu-light:after {
     background: white;

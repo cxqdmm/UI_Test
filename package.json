@@ -83,6 +83,7 @@
     "lodash": "^4.17.10",
     "sass-loader": "^7.0.3",
     "vue-carousel": "^0.8.1",
+    "vue-codemirror": "^4.0.5",
     "vue-electron": "^1.0.6",
     "vue-router": "^3.0.1"
   }
